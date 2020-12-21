@@ -6,13 +6,9 @@ using System.IO;
 using Alipay.EasySDK.Payment.FaceToFace.Models;
 using Alipay.EasySDK.Util.Generic.Models;
 using System.Collections.Generic;
-using NLog;
 using RJCP.IO.Ports;
 using Newtonsoft.Json.Linq;
-using System.Threading;
-
-using AlipayClassLibrary;
-
+using Siasun.AFC.AlipayClassLibrary;
 
 namespace ConsoleAppAlipayEasySDKCall
 {
@@ -50,10 +46,10 @@ namespace ConsoleAppAlipayEasySDKCall
 
             AlipayClass alipay = new AlipayClass();
 
-            string result = alipay.Init();
-            Console.WriteLine(result);
-            string sf;
-            alipay.PrecreateQRcode("1", "333", "7", out sf);
+            // string result = alipay.Init();
+            // Console.WriteLine(result);
+            // string sf;
+            // alipay.PrecreateQRcode("1", "333", "7", out sf);
 
 
             Console.ReadLine();

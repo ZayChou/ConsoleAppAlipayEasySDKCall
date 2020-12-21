@@ -3,7 +3,18 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.0.5</Version>
+    <Version>1.0.10</Version>
+    <Description>Alipay接口调用类（收款二维码请求，交易状态查询）</Description>
+    <Authors>张瑜</Authors>
+    <Company>新松机器人</Company>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>D:\siasun\TestCode\ConsoleAppAlipayEasySDKCall\AlipayClassLibrary\AlipayClassLibrary.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>D:\siasun\TestCode\ConsoleAppAlipayEasySDKCall\AlipayClassLibrary\AlipayClassLibrary.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

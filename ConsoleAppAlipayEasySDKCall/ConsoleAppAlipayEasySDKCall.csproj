@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AlipayClassLibrary" Version="1.0.5" />
+    <PackageReference Include="AlipayClassLibrary" Version="1.0.9" />
     <PackageReference Include="NLog.Extensions.Logging" Version="1.6.2" />
     <PackageReference Include="SerialPortStream" Version="2.2.0" />
   </ItemGroup>

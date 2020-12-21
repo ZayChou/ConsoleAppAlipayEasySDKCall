@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AlipayClassLibrary</name>
+    </assembly>
+    <members>
+        <member name="T:Siasun.AFC.AlipayClassLibrary.AlipayClass">
+            <summary>
+            支付宝支付接口调用类
+            </summary>
+        </member>
+        <member name="P:Siasun.AFC.AlipayClassLibrary.AlipayClass.AppId">
+            <summary>
+            应用ID
+            </summary>
+        </member>
+        <member name="P:Siasun.AFC.AlipayClassLibrary.AlipayClass.GatewayHost">
+            <summary>
+            支付宝服务器地址
+            </summary>
+        </member>
+        <member name="P:Siasun.AFC.AlipayClassLibrary.AlipayClass.AppPrivateKeyPath">
+            <summary>
+            应用私钥相对执行目录地址
+            </summary>
+        </member>
+        <member name="P:Siasun.AFC.AlipayClassLibrary.AlipayClass.AlipayPublicKeyPath">
+            <summary>
+            支付宝公钥相对执行目录地址
+            </summary>
+        </member>
+        <member name="M:Siasun.AFC.AlipayClassLibrary.AlipayClass.Init">
+            <summary>
+            读取密钥文件
+            </summary>
+            <returns>success 成功 ，其它失败原因</returns>
+        </member>
+        <member name="M:Siasun.AFC.AlipayClassLibrary.AlipayClass.PrecreateQRcode(System.String,System.String,System.String,System.String@)">
+            <summary>
+            二维码支付请求
+            </summary>
+            <param name="subject">订单标题</param>
+            <param name="outTradeNo">设备订单号，不能重复，建议deviceID + time</param>
+            <param name="totalAmount">订单金额</param>
+            <param name="outPut">return true 函数调用成功，输出二维码字符串；rerun false 输出接口调用失败原因</param>
+            <returns>true 成功 false 失败</returns>
+        </member>
+        <member name="M:Siasun.AFC.AlipayClassLibrary.AlipayClass.TradeQuery(System.String,System.String@)">
+            <summary>
+            查询二维码支付结果
+            </summary>
+            <param name="outTradeNo">设备订单号</param>
+            <param name="outPut">return true 函数调用成功，"TRADE_SUCCESS" 交易已支付，rerun false 输出接口调用失败原因</param>
+            <returns></returns>
+        </member>
+        <member name="M:Siasun.AFC.AlipayClassLibrary.AlipayClass.Refund(System.String,System.String)">
+            <summary>
+            申请退款接口
+            </summary>
+            <param name="outTradeNo">订单号</param>
+            <param name="amount">订单金额</param>
+            <returns>接口调用成功返回 “SUCCESS” 否则返回失败原因</returns>
+        </member>
+        <member name="M:Siasun.AFC.AlipayClassLibrary.AlipayClass.QueryRefund(System.String)">
+            <summary>
+            退款结果查询接口
+            </summary>
+            <param name="outTradeNo"></param>
+            <returns>退款成功返回 “SUCCESS” 否则返回失败原因</returns>
+        </member>
+    </members>
+</doc>

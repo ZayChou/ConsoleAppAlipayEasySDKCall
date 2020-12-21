@@ -4,10 +4,13 @@ using Alipay.EasySDK.Payment.Common.Models;
 using Alipay.EasySDK.Payment.FaceToFace.Models;
 using System;
 using System.IO;
-using System.Runtime.InteropServices;
 
-namespace AlipayClassLibrary
+
+namespace Siasun.AFC.AlipayClassLibrary
 {
+    /// <summary>
+    /// 支付宝支付接口调用类
+    /// </summary>
     public class AlipayClass
     {
         /// <summary>
@@ -26,7 +29,7 @@ namespace AlipayClassLibrary
         /// 支付宝公钥相对执行目录地址
         /// </summary>
         public string AlipayPublicKeyPath { get; set; } = "./支付宝公钥.txt";
-        public bool ReadFile(string filePath , out string stream)
+        private bool ReadFile(string filePath , out string stream)
         {
             try
             {
@@ -49,13 +52,11 @@ namespace AlipayClassLibrary
         /// 读取密钥文件
         /// </summary>
         /// <returns>success 成功 ，其它失败原因</returns>
-        public string Init()
+        public  string Init()
         {
-            string appKey;
-            if (!ReadFile(AppPrivateKeyPath, out appKey))
+            if (!ReadFile(AppPrivateKeyPath, out string appKey))
                 return appKey;
-            string alipayKey;
-            if (!ReadFile(AlipayPublicKeyPath, out alipayKey))
+            if (!ReadFile(AlipayPublicKeyPath, out string alipayKey))
                 return alipayKey;
 
             Config config = new Config()
@@ -142,6 +143,61 @@ namespace AlipayClassLibrary
             }
             return false;
         }
-  
+        /// <summary>
+        /// 申请退款接口
+        /// </summary>
+        /// <param name="outTradeNo">订单号</param>
+        /// <param name="amount">订单金额</param>
+        /// <returns>接口调用成功返回 “SUCCESS” 否则返回失败原因</returns>
+        public string Refund(string outTradeNo, string amount)
+        {
+            try
+            {
+                // 2. 发起API调用
+                AlipayTradeRefundResponse response = Factory.Payment.Common().Refund(outTradeNo, amount);
+                // 3. 处理响应或异常
+                if ("10000".Equals(response.Code))
+                {
+                    return "SUCCESS";
+                }
+                else
+                {
+                    return response.Msg + "，" + response.SubMsg;
+                }
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
+        /// <summary>
+        /// 退款结果查询接口
+        /// </summary>
+        /// <param name="outTradeNo"></param>
+        /// <returns>退款成功返回 “SUCCESS” 否则返回失败原因</returns>
+        public string QueryRefund(string outTradeNo)   
+        {
+            try
+            {
+                AlipayTradeFastpayRefundQueryResponse response = Factory.Payment.Common().QueryRefund(outTradeNo, outTradeNo);
+                // 2. 处理响应或异常
+                if ("10000".Equals(response.Code))
+                {
+                    Console.WriteLine("调用成功");
+                    if (response.RefundStatus == string.Empty || response.RefundStatus == "REFUND_SUCCESS")
+                        return "SUCCESS";
+                    else
+                        return "Call fail please retry";
+                }
+                else
+                {
+                    return response.Msg + "，" + response.SubMsg;
+                }
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
     }
 }
